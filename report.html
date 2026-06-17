@@ -221,8 +221,107 @@
       text-align: right;
     }
 
+    .date-banner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .date-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 18px;
+      box-shadow: 0 4px 12px rgba(16, 24, 40, 0.06);
+      border-top: 4px solid var(--accent);
+    }
+
+    .date-card .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .date-card .value {
+      font-size: 17px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .date-card.highlight-date {
+      border-top-color: var(--warning);
+    }
+
+    .date-card.highlight-date .value {
+      color: var(--warning);
+    }
+
+    .milestone-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .milestone-row:last-child {
+      border-bottom: none;
+    }
+
+    .milestone-row .milestone-name {
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .milestone-date {
+      font-size: 13px;
+      font-weight: bold;
+      white-space: nowrap;
+      color: var(--success);
+      background: #eef9f2;
+      border: 1px solid #cfead8;
+      border-radius: 8px;
+      padding: 3px 10px;
+    }
+
+    .milestone-date.pending {
+      color: var(--warning);
+      background: #fff7ed;
+      border-color: #fed7aa;
+    }
+
+    .golive-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #e8f4fd, #dbeafe);
+      border: 1px solid #bfdbfe;
+      margin-top: 16px;
+    }
+
+    .golive-box .golive-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--primary-2);
+      font-weight: bold;
+    }
+
+    .golive-box .golive-value {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
     @media (max-width: 980px) {
-      .content, .meta {
+      .content, .meta, .date-banner {
         grid-template-columns: 1fr;
       }
     }
@@ -249,6 +348,25 @@
       </div>
     </section>
 
+    <div class="date-banner">
+      <div class="date-card">
+        <div class="label">📅 Data do Reporte</div>
+        <div class="value">17/06/2026</div>
+      </div>
+      <div class="date-card">
+        <div class="label">📆 Período de Referência</div>
+        <div class="value">Junho / 2026</div>
+      </div>
+      <div class="date-card">
+        <div class="label">🔄 Última Atualização</div>
+        <div class="value">17/06/2026</div>
+      </div>
+      <div class="date-card highlight-date">
+        <div class="label">🤝 Reunião Executiva</div>
+        <div class="value">A definir</div>
+      </div>
+    </div>
+
     <section class="content">
       <div class="column">
         <article class="card">
@@ -265,22 +383,34 @@
         <article class="card">
           <h2>Atividades Concluídas</h2>
           <h3>Flow Design</h3>
-          <ul>
-            <li>Validação dos fluxos operacionais do Empower;</li>
-            <li>Revisão e refinamento das regras funcionais dos processos integrados ao SAP PM.</li>
-          </ul>
+          <div class="milestone-row">
+            <span class="milestone-name">Validação dos fluxos operacionais do Empower</span>
+            <span class="milestone-date">Mai/2026</span>
+          </div>
+          <div class="milestone-row">
+            <span class="milestone-name">Revisão e refinamento das regras funcionais dos processos integrados ao SAP PM</span>
+            <span class="milestone-date">Mai/2026</span>
+          </div>
 
           <h3>Melhorias solicitadas e implementadas</h3>
-          <ul>
-            <li>Ajustes no fluxo de informações de ativos;</li>
-            <li>Inclusão de botão para alteração do <strong>System Status</strong> de <strong>MSPN</strong> para <strong>MSPR</strong> na tela <strong>“Minhas Notas”</strong>.</li>
-          </ul>
+          <div class="milestone-row">
+            <span class="milestone-name">Ajustes no fluxo de informações de ativos</span>
+            <span class="milestone-date">Jun/2026</span>
+          </div>
+          <div class="milestone-row">
+            <span class="milestone-name">Inclusão de botão para alteração do System Status (MSPN → MSPR) em "Minhas Notas"</span>
+            <span class="milestone-date">Jun/2026</span>
+          </div>
 
           <h3>Capacitação e validação</h3>
-          <ul>
-            <li>Treinamento concluído;</li>
-            <li>Testes de Homologação UAT concluídos.</li>
-          </ul>
+          <div class="milestone-row">
+            <span class="milestone-name">Treinamento concluído</span>
+            <span class="milestone-date">Jun/2026</span>
+          </div>
+          <div class="milestone-row">
+            <span class="milestone-name">Testes de Homologação UAT concluídos</span>
+            <span class="milestone-date">Jun/2026</span>
+          </div>
         </article>
 
         <article class="card">
@@ -289,24 +419,61 @@
           <div class="timeline">
             <div class="timeline-step">
               <div class="timeline-marker">1</div>
-              <div class="timeline-content">Aprovação do Termo de Aceite UAT</div>
+              <div class="timeline-content">
+                <strong>Aprovação do Termo de Aceite UAT</strong>
+                <div class="milestone-row" style="border:none;padding:4px 0 0;">
+                  <span class="milestone-name" style="font-size:13px;color:var(--muted);">Data prevista</span>
+                  <span class="milestone-date pending">A definir</span>
+                </div>
+              </div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">2</div>
-              <div class="timeline-content">Documentação do Plano de Cutover</div>
+              <div class="timeline-content">
+                <strong>Documentação do Plano de Cutover</strong>
+                <div class="milestone-row" style="border:none;padding:4px 0 0;">
+                  <span class="milestone-name" style="font-size:13px;color:var(--muted);">Data prevista</span>
+                  <span class="milestone-date pending">A definir</span>
+                </div>
+              </div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">3</div>
-              <div class="timeline-content">Instalação dos Add-Ons em PRD</div>
+              <div class="timeline-content">
+                <strong>Instalação dos Add-Ons em PRD</strong>
+                <div class="milestone-row" style="border:none;padding:4px 0 0;">
+                  <span class="milestone-name" style="font-size:13px;color:var(--muted);">Data prevista</span>
+                  <span class="milestone-date pending">A definir</span>
+                </div>
+              </div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">4</div>
-              <div class="timeline-content">Configurações técnicas e funcionais finais</div>
+              <div class="timeline-content">
+                <strong>Configurações técnicas e funcionais finais</strong>
+                <div class="milestone-row" style="border:none;padding:4px 0 0;">
+                  <span class="milestone-name" style="font-size:13px;color:var(--muted);">Data prevista</span>
+                  <span class="milestone-date pending">A definir</span>
+                </div>
+              </div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">5</div>
-              <div class="timeline-content">Go-live</div>
+              <div class="timeline-content">
+                <strong>Go-live</strong>
+                <div class="milestone-row" style="border:none;padding:4px 0 0;">
+                  <span class="milestone-name" style="font-size:13px;color:var(--muted);">Data prevista</span>
+                  <span class="milestone-date pending">A definir</span>
+                </div>
+              </div>
             </div>
+          </div>
+          <div class="golive-box">
+            <div>
+              <div class="golive-label">🚀 Previsão de Go-live</div>
+              <div style="font-size:13px;color:var(--muted);margin-top:4px;">Aguardando confirmação do Plano de Cutover</div>
+            </div>
+            <div class="golive-value">A definir</div>
           </div>
         </article>
       </div>
@@ -315,11 +482,41 @@
         <article class="card">
           <h2>Próximos Passos</h2>
           <div class="highlight-list">
-            <div class="highlight-item"><strong>1. Aceite UAT</strong>Aprovação formal do Termo de Aceite UAT.</div>
-            <div class="highlight-item"><strong>2. Cutover</strong>Preparação e consolidação da documentação do Plano de Cutover.</div>
-            <div class="highlight-item"><strong>3. Produção</strong>Instalação dos Add-Ons no ambiente PRD.</div>
-            <div class="highlight-item"><strong>4. Ajustes Finais</strong>Execução das configurações técnicas e funcionais.</div>
-            <div class="highlight-item"><strong>5. Entrada em Operação</strong>Realização do Go-live.</div>
+            <div class="highlight-item">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong>1. Aceite UAT</strong>
+                <span class="milestone-date pending">A definir</span>
+              </div>
+              Aprovação formal do Termo de Aceite UAT.
+            </div>
+            <div class="highlight-item">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong>2. Cutover</strong>
+                <span class="milestone-date pending">A definir</span>
+              </div>
+              Preparação e consolidação da documentação do Plano de Cutover.
+            </div>
+            <div class="highlight-item">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong>3. Produção</strong>
+                <span class="milestone-date pending">A definir</span>
+              </div>
+              Instalação dos Add-Ons no ambiente PRD.
+            </div>
+            <div class="highlight-item">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong>4. Ajustes Finais</strong>
+                <span class="milestone-date pending">A definir</span>
+              </div>
+              Execução das configurações técnicas e funcionais.
+            </div>
+            <div class="highlight-item">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong>5. Entrada em Operação</strong>
+                <span class="milestone-date pending">A definir</span>
+              </div>
+              Realização do Go-live.
+            </div>
           </div>
         </article>
 
@@ -348,7 +545,7 @@
       </div>
     </section>
 
-    <div class="footer-note">Documento gerado com base no arquivo “RESUMO EXECUTIVO”.</div>
+    <div class="footer-note">Documento gerado com base no arquivo "RESUMO EXECUTIVO" · Reporte em 17/06/2026.</div>
   </div>
 </body>
 </html>
