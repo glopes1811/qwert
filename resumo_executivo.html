@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resumo Executivo – Status do Projeto</title>
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 11pt;
+      color: #1a1a1a;
+      background: #f4f6f8;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Page wrapper ─────────────────────────────────────────── */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 20px auto;
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(0,0,0,.15);
+      padding: 0 0 32px;
+    }
+
+    /* ── Header ───────────────────────────────────────────────── */
+    .header {
+      background: #003366;
+      color: #fff;
+      padding: 20px 28px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .header-logo {
+      font-size: 22pt;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #ffd700;
+      white-space: nowrap;
+    }
+    .header-title {
+      text-align: center;
+      flex: 1;
+    }
+    .header-title h1 {
+      font-size: 15pt;
+      font-weight: 700;
+      letter-spacing: .5px;
+      line-height: 1.3;
+    }
+    .header-title p {
+      font-size: 9pt;
+      opacity: .85;
+      margin-top: 3px;
+    }
+    .header-meta {
+      text-align: right;
+      font-size: 9pt;
+      line-height: 1.7;
+      white-space: nowrap;
+    }
+
+    /* ── Info bar ─────────────────────────────────────────────── */
+    .info-bar {
+      background: #e8eff7;
+      border-bottom: 2px solid #003366;
+      padding: 10px 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 32px;
+      font-size: 9.5pt;
+    }
+    .info-bar span { color: #444; }
+    .info-bar strong { color: #003366; }
+
+    /* ── Content padding ──────────────────────────────────────── */
+    .content { padding: 20px 28px 0; }
+
+    /* ── Section title ────────────────────────────────────────── */
+    .section-title {
+      background: #003366;
+      color: #fff;
+      font-size: 10pt;
+      font-weight: 700;
+      letter-spacing: .4px;
+      padding: 5px 10px;
+      margin-bottom: 10px;
+      margin-top: 18px;
+      border-radius: 3px 3px 0 0;
+    }
+
+    /* ── Status summary row ───────────────────────────────────── */
+    .status-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .status-card {
+      flex: 1;
+      min-width: 120px;
+      border: 1px solid #d0d8e4;
+      border-radius: 4px;
+      overflow: hidden;
+      text-align: center;
+    }
+    .status-card .sc-label {
+      background: #003366;
+      color: #fff;
+      font-size: 8.5pt;
+      font-weight: 600;
+      padding: 4px 6px;
+    }
+    .status-card .sc-indicator {
+      font-size: 22pt;
+      padding: 8px 6px 4px;
+      font-weight: 700;
+    }
+    .status-card .sc-text {
+      font-size: 8pt;
+      padding-bottom: 7px;
+      color: #555;
+    }
+    .verde   { color: #1a7d3e; background: #eafaf1; }
+    .amarelo { color: #a06000; background: #fffae6; }
+    .vermelho{ color: #c0392b; background: #fdf0ef; }
+
+    /* ── Two-column layout ────────────────────────────────────── */
+    .two-col {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .col-left  { flex: 2; }
+    .col-right { flex: 1; }
+
+    /* ── Generic card ─────────────────────────────────────────── */
+    .card {
+      border: 1px solid #d0d8e4;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .card-body {
+      padding: 10px 12px;
+      font-size: 9.5pt;
+      line-height: 1.6;
+    }
+
+    /* ── Table ────────────────────────────────────────────────── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+    }
+    thead th {
+      background: #003366;
+      color: #fff;
+      padding: 5px 8px;
+      text-align: left;
+      font-weight: 600;
+    }
+    tbody td {
+      padding: 5px 8px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+    tbody tr:nth-child(even) td { background: #f7f9fc; }
+
+    /* ── Milestone timeline ───────────────────────────────────── */
+    .milestones { display: flex; flex-direction: column; gap: 6px; }
+    .milestone {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 9pt;
+    }
+    .ms-dot {
+      flex-shrink: 0;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      margin-top: 2px;
+    }
+    .ms-dot.concluido  { background: #1a7d3e; }
+    .ms-dot.em-andamento { background: #e8a000; }
+    .ms-dot.pendente   { background: #c0392b; }
+    .ms-dot.planejado  { background: #aab4be; }
+
+    .ms-content { flex: 1; }
+    .ms-date    { font-weight: 600; color: #003366; }
+    .ms-status  { font-size: 8pt; font-style: italic; color: #666; }
+
+    /* ── Badge ────────────────────────────────────────────────── */
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 8pt;
+      font-weight: 600;
+    }
+    .badge-verde    { background: #d4edda; color: #1a7d3e; }
+    .badge-amarelo  { background: #fff3cd; color: #a06000; }
+    .badge-vermelho { background: #f8d7da; color: #c0392b; }
+    .badge-azul     { background: #cce5ff; color: #004085; }
+
+    /* ── Progress bar ─────────────────────────────────────────── */
+    .progress-wrap {
+      background: #e2e8f0;
+      border-radius: 6px;
+      height: 12px;
+      overflow: hidden;
+      margin: 4px 0;
+    }
+    .progress-bar {
+      height: 100%;
+      border-radius: 6px;
+      background: #1a7d3e;
+      transition: width .4s;
+    }
+
+    /* ── Legend ───────────────────────────────────────────────── */
+    .legend {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 8pt;
+      margin-top: 8px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+    .footer {
+      margin-top: 24px;
+      border-top: 2px solid #003366;
+      padding: 8px 28px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 8pt;
+      color: #666;
+    }
+
+    /* ── Print ────────────────────────────────────────────────── */
+    @media print {
+      body { background: #fff; }
+      .page { box-shadow: none; margin: 0; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ════════════════════════ CABEÇALHO ════════════════════════ -->
+  <div class="header">
+    <div class="header-logo">◆ PMO</div>
+    <div class="header-title">
+      <h1>RESUMO EXECUTIVO DO PROJETO</h1>
+      <p>Relatório de Status &nbsp;|&nbsp; Gerenciamento de Projetos</p>
+    </div>
+    <div class="header-meta">
+      <strong>Versão:</strong> 2.0<br>
+      <strong>Data:</strong> Junho / 2026<br>
+      <strong>Classificação:</strong> Confidencial
+    </div>
+  </div>
+
+  <!-- ════════════════════════ BARRA DE INFO ════════════════════ -->
+  <div class="info-bar">
+    <div><span>Projeto: </span><strong>Transformação Digital – Módulo Financeiro</strong></div>
+    <div><span>Gerente: </span><strong>Ana Paula Ferreira</strong></div>
+    <div><span>Patrocinador: </span><strong>Dir. Carlos Menezes</strong></div>
+    <div><span>Período: </span><strong>Jan/2026 – Dez/2026</strong></div>
+    <div><span>Fase Atual: </span><strong>Implementação – Sprint 8</strong></div>
+  </div>
+
+  <!-- ════════════════════════ CONTEÚDO ═════════════════════════ -->
+  <div class="content">
+
+    <!-- ── STATUS GERAL ── -->
+    <div class="section-title">STATUS GERAL DO PROJETO</div>
+    <div class="status-row">
+
+      <div class="status-card">
+        <div class="sc-label">STATUS GERAL</div>
+        <div class="sc-indicator verde">●</div>
+        <div class="sc-text">VERDE – No Prazo</div>
+      </div>
+
+      <div class="status-card">
+        <div class="sc-label">PRAZO / CRONOGRAMA</div>
+        <div class="sc-indicator verde">●</div>
+        <div class="sc-text">VERDE – Conforme</div>
+      </div>
+
+      <div class="status-card">
+        <div class="sc-label">ESCOPO</div>
+        <div class="sc-indicator verde">●</div>
+        <div class="sc-text">VERDE – Sem Mudanças</div>
+      </div>
+
+      <div class="status-card">
+        <div class="sc-label">ORÇAMENTO</div>
+        <div class="sc-indicator amarelo">●</div>
+        <div class="sc-text">AMARELO – Atenção</div>
+      </div>
+
+      <div class="status-card">
+        <div class="sc-label">QUALIDADE</div>
+        <div class="sc-indicator verde">●</div>
+        <div class="sc-text">VERDE – Conforme</div>
+      </div>
+
+      <div class="status-card">
+        <div class="sc-label">RISCOS</div>
+        <div class="sc-indicator amarelo">●</div>
+        <div class="sc-text">AMARELO – Monitorado</div>
+      </div>
+
+    </div><!-- /status-row -->
+
+    <!-- ── AVANÇO FÍSICO ── -->
+    <div class="section-title">AVANÇO FÍSICO DO PROJETO</div>
+    <div class="card">
+      <div class="card-body">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:35%">Entregável / Fase</th>
+              <th style="width:15%">Prev. Início</th>
+              <th style="width:15%">Prev. Fim</th>
+              <th style="width:12%">% Planejado</th>
+              <th style="width:12%">% Realizado</th>
+              <th style="width:11%">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1. Levantamento de Requisitos</td>
+              <td>10/01/2026</td>
+              <td>31/01/2026</td>
+              <td>100%</td>
+              <td>100%</td>
+              <td><span class="badge badge-verde">Concluído</span></td>
+            </tr>
+            <tr>
+              <td>2. Arquitetura e Design de Solução</td>
+              <td>03/02/2026</td>
+              <td>28/02/2026</td>
+              <td>100%</td>
+              <td>100%</td>
+              <td><span class="badge badge-verde">Concluído</span></td>
+            </tr>
+            <tr>
+              <td>3. Desenvolvimento – Módulo Contas a Pagar</td>
+              <td>02/03/2026</td>
+              <td>30/04/2026</td>
+              <td>100%</td>
+              <td>100%</td>
+              <td><span class="badge badge-verde">Concluído</span></td>
+            </tr>
+            <tr>
+              <td>4. Desenvolvimento – Módulo Contas a Receber</td>
+              <td>01/04/2026</td>
+              <td>31/05/2026</td>
+              <td>100%</td>
+              <td>95%</td>
+              <td><span class="badge badge-amarelo">Em Andamento</span></td>
+            </tr>
+            <tr>
+              <td>5. Integração com ERP Legado</td>
+              <td>01/05/2026</td>
+              <td>30/06/2026</td>
+              <td>60%</td>
+              <td>55%</td>
+              <td><span class="badge badge-amarelo">Em Andamento</span></td>
+            </tr>
+            <tr>
+              <td>6. Testes de Integração e UAT</td>
+              <td>01/07/2026</td>
+              <td>31/08/2026</td>
+              <td>0%</td>
+              <td>0%</td>
+              <td><span class="badge badge-azul">Planejado</span></td>
+            </tr>
+            <tr>
+              <td>7. Treinamento e Go-Live</td>
+              <td>01/09/2026</td>
+              <td>30/11/2026</td>
+              <td>0%</td>
+              <td>0%</td>
+              <td><span class="badge badge-azul">Planejado</span></td>
+            </tr>
+            <tr>
+              <td>8. Encerramento e Pós-Implantação</td>
+              <td>01/12/2026</td>
+              <td>31/12/2026</td>
+              <td>0%</td>
+              <td>0%</td>
+              <td><span class="badge badge-azul">Planejado</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Barra de progresso geral -->
+        <div style="margin-top:12px; font-size:9pt;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
+            <strong>Avanço Físico Geral do Projeto</strong>
+            <span style="color:#003366; font-weight:700;">62%</span>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-bar" style="width:62%"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:3px; font-size:8pt; color:#666;">
+            <span>Jan/2026</span><span>Jun/2026 (atual)</span><span>Dez/2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DUAS COLUNAS: CONQUISTAS + MARCOS ── -->
+    <div class="two-col">
+      <div class="col-left">
+
+        <!-- Principais Conquistas -->
+        <div class="section-title">PRINCIPAIS CONQUISTAS DO PERÍODO</div>
+        <div class="card">
+          <div class="card-body">
+            <ul style="padding-left:16px; line-height:2;">
+              <li>Conclusão do módulo <strong>Contas a Pagar</strong> com aprovação dos usuários-chave (UAT parcial realizado em 28/04/2026).</li>
+              <li>Finalização de <strong>95% do módulo Contas a Receber</strong>; pendência apenas em relatórios personalizados.</li>
+              <li>Aprovação da <strong>Arquitetura de Integração</strong> com o ERP Legado pelo Comitê de TI em 15/05/2026.</li>
+              <li>Entrega do <strong>Plano de Treinamento</strong> ao RH para validação e agendamento das turmas.</li>
+              <li>Redução de 18% nos chamados de suporte ao sistema de pagamentos após ajustes de performance em maio/2026.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Próximas Atividades -->
+        <div class="section-title">PRÓXIMAS ATIVIDADES (JUNHO – JULHO/2026)</div>
+        <div class="card">
+          <div class="card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Atividade</th>
+                  <th style="width:20%">Responsável</th>
+                  <th style="width:22%">Prazo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Concluir relatórios personalizados do módulo C. Receber</td>
+                  <td>Equipe Dev</td>
+                  <td>20/06/2026</td>
+                </tr>
+                <tr>
+                  <td>Finalizar desenvolvimento da camada de integração ERP</td>
+                  <td>Equipe Dev + TI</td>
+                  <td>30/06/2026</td>
+                </tr>
+                <tr>
+                  <td>Iniciar testes de integração (ambiente de homologação)</td>
+                  <td>QA / Tester</td>
+                  <td>07/07/2026</td>
+                </tr>
+                <tr>
+                  <td>Apresentação do plano de Go-Live ao Patrocinador</td>
+                  <td>GP + Arquiteto</td>
+                  <td>15/07/2026</td>
+                </tr>
+                <tr>
+                  <td>Revisão do orçamento remanescente com área Financeira</td>
+                  <td>GP + PMO</td>
+                  <td>18/06/2026</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /col-left -->
+
+      <div class="col-right">
+
+        <!-- Marcos -->
+        <div class="section-title">MARCOS DO PROJETO</div>
+        <div class="card">
+          <div class="card-body">
+            <div class="milestones">
+              <div class="milestone">
+                <div class="ms-dot concluido"></div>
+                <div class="ms-content">
+                  <div>Kick-off do Projeto</div>
+                  <div class="ms-date">10/01/2026</div>
+                  <div class="ms-status">✔ Concluído</div>
+                </div>
+              </div>
+              <div class="milestone">
+                <div class="ms-dot concluido"></div>
+                <div class="ms-content">
+                  <div>Aprovação do Design de Solução</div>
+                  <div class="ms-date">28/02/2026</div>
+                  <div class="ms-status">✔ Concluído</div>
+                </div>
+              </div>
+              <div class="milestone">
+                <div class="ms-dot concluido"></div>
+                <div class="ms-content">
+                  <div>Entrega Módulo Contas a Pagar</div>
+                  <div class="ms-date">30/04/2026</div>
+                  <div class="ms-status">✔ Concluído</div>
+                </div>
+              </div>
+              <div class="milestone">
+                <div class="ms-dot em-andamento"></div>
+                <div class="ms-content">
+                  <div>Entrega Módulo Contas a Receber</div>
+                  <div class="ms-date">30/06/2026</div>
+                  <div class="ms-status">⟳ Em Andamento</div>
+                </div>
+              </div>
+              <div class="milestone">
+                <div class="ms-dot em-andamento"></div>
+                <div class="ms-content">
+                  <div>Integração ERP Concluída</div>
+                  <div class="ms-date">30/06/2026</div>
+                  <div class="ms-status">⟳ Em Andamento</div>
+                </div>
+              </div>
+              <div class="milestone">
+                <div class="ms-dot planejado"></div>
+                <div class="ms-content">
+                  <div>UAT Aprovado pelo Cliente</div>
+                  <div class="ms-date">31/08/2026</div>
+                  <div class="ms-status">○ Planejado</div>
+                </div>
+              </div>
+              <div class="milestone">
+                <div class="ms-dot planejado"></div>
+                <div class="ms-content">
+                  <div>Go-Live em Produção</div>
+                  <div class="ms-date">30/09/2026</div>
+                  <div class="ms-status">○ Planejado</div>
+                </div>
+              </div>
+              <div class="milestone">
+                <div class="ms-dot planejado"></div>
+                <div class="ms-content">
+                  <div>Encerramento Formal do Projeto</div>
+                  <div class="ms-date">31/12/2026</div>
+                  <div class="ms-status">○ Planejado</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="legend" style="margin-top:12px;">
+              <div class="legend-item"><div class="legend-dot" style="background:#1a7d3e"></div>Concluído</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#e8a000"></div>Em Andamento</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#aab4be"></div>Planejado</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#c0392b"></div>Atrasado</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Orçamento -->
+        <div class="section-title">ORÇAMENTO</div>
+        <div class="card">
+          <div class="card-body">
+            <table>
+              <thead>
+                <tr><th>Item</th><th style="text-align:right">Valor</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Orçamento Total Aprovado</td><td style="text-align:right">R$ 1.850.000</td></tr>
+                <tr><td>Valor Gasto (acumulado)</td><td style="text-align:right">R$ 1.190.000</td></tr>
+                <tr><td>Saldo Disponível</td><td style="text-align:right; color:#1a7d3e; font-weight:700">R$&nbsp;660.000</td></tr>
+                <tr><td>Previsão de Custo Final (EAC)</td><td style="text-align:right; color:#a06000; font-weight:700">R$ 1.940.000</td></tr>
+                <tr><td>Variação de Custo (CV)</td><td style="text-align:right; color:#c0392b">▲ R$ 90.000</td></tr>
+              </tbody>
+            </table>
+            <div style="margin-top:8px; font-size:8pt; color:#666; font-style:italic;">
+              ⚠ Previsão de extrapolação de R$&nbsp;90 mil devido a horas extras na fase de integração. Mitigação em análise.
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /col-right -->
+    </div><!-- /two-col -->
+
+    <!-- ── RISCOS E IMPEDIMENTOS ── -->
+    <div class="section-title">RISCOS, IMPEDIMENTOS E AÇÕES</div>
+    <div class="card">
+      <div class="card-body">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th style="width:30%">Risco / Impedimento</th>
+              <th style="width:12%">Probabilidade</th>
+              <th style="width:10%">Impacto</th>
+              <th style="width:10%">Severidade</th>
+              <th style="width:28%">Ação / Resposta</th>
+              <th style="width:12%">Responsável</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>R01</td>
+              <td>Atraso na entrega da API do ERP pelo fornecedor</td>
+              <td><span class="badge badge-amarelo">Média</span></td>
+              <td><span class="badge badge-vermelho">Alto</span></td>
+              <td><span class="badge badge-vermelho">Alto</span></td>
+              <td>Negociar SLA contratual; desenvolver mock para continuidade dos testes</td>
+              <td>GP + Compras</td>
+            </tr>
+            <tr>
+              <td>R02</td>
+              <td>Indisponibilidade de usuários-chave para UAT</td>
+              <td><span class="badge badge-amarelo">Média</span></td>
+              <td><span class="badge badge-amarelo">Médio</span></td>
+              <td><span class="badge badge-amarelo">Médio</span></td>
+              <td>Alinhar agenda com gerências; propor alternativo em julho</td>
+              <td>GP + RH</td>
+            </tr>
+            <tr>
+              <td>R03</td>
+              <td>Extrapolação orçamentária devido a horas extras</td>
+              <td><span class="badge badge-verde">Baixa</span></td>
+              <td><span class="badge badge-amarelo">Médio</span></td>
+              <td><span class="badge badge-amarelo">Médio</span></td>
+              <td>Solicitar reserva de contingência de R$&nbsp;100k ao patrocinador</td>
+              <td>GP + PMO</td>
+            </tr>
+            <tr>
+              <td>R04</td>
+              <td>Conflito de versões entre módulos (C. Receber x ERP)</td>
+              <td><span class="badge badge-verde">Baixa</span></td>
+              <td><span class="badge badge-verde">Baixo</span></td>
+              <td><span class="badge badge-verde">Baixo</span></td>
+              <td>Revisão do plano de versionamento; testes regressivos adicionais</td>
+              <td>Arquiteto</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── DECISÕES NECESSÁRIAS ── -->
+    <div class="section-title">DECISÕES NECESSÁRIAS / PENDÊNCIAS COM STAKEHOLDERS</div>
+    <div class="card">
+      <div class="card-body">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th style="width:40%">Decisão / Pendência</th>
+              <th style="width:18%">Solicitado por</th>
+              <th style="width:18%">Decisor</th>
+              <th style="width:14%">Prazo</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>D01</td>
+              <td>Aprovação de reserva de contingência orçamentária (R$&nbsp;100k)</td>
+              <td>GP</td>
+              <td>Dir. C. Menezes</td>
+              <td>20/06/2026</td>
+              <td><span class="badge badge-amarelo">Aguardando</span></td>
+            </tr>
+            <tr>
+              <td>D02</td>
+              <td>Definir janela de Go-Live (setembro ou outubro/2026)</td>
+              <td>GP + TI</td>
+              <td>Comitê Executivo</td>
+              <td>15/07/2026</td>
+              <td><span class="badge badge-azul">Planejado</span></td>
+            </tr>
+            <tr>
+              <td>D03</td>
+              <td>Confirmar escopo dos relatórios customizados (C. Receber)</td>
+              <td>Equipe Dev</td>
+              <td>Usuário-Chave Financeiro</td>
+              <td>13/06/2026</td>
+              <td><span class="badge badge-amarelo">Aguardando</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── INDICADORES DE DESEMPENHO ── -->
+    <div class="section-title">INDICADORES DE DESEMPENHO (EVM)</div>
+    <div class="card">
+      <div class="card-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Indicador</th>
+              <th>Sigla</th>
+              <th>Valor Atual</th>
+              <th>Referência</th>
+              <th>Interpretação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Índice de Desempenho de Prazos</td>
+              <td><strong>SPI</strong></td>
+              <td>1,03</td>
+              <td>≥ 1,00</td>
+              <td><span class="badge badge-verde">Adiantado</span></td>
+            </tr>
+            <tr>
+              <td>Índice de Desempenho de Custos</td>
+              <td><strong>CPI</strong></td>
+              <td>0,95</td>
+              <td>≥ 1,00</td>
+              <td><span class="badge badge-amarelo">Levemente acima do custo</span></td>
+            </tr>
+            <tr>
+              <td>% de Entregas no Prazo</td>
+              <td><strong>OTD</strong></td>
+              <td>87%</td>
+              <td>≥ 85%</td>
+              <td><span class="badge badge-verde">Dentro da meta</span></td>
+            </tr>
+            <tr>
+              <td>Taxa de Defeitos em QA</td>
+              <td><strong>DFR</strong></td>
+              <td>3,2%</td>
+              <td>≤ 5%</td>
+              <td><span class="badge badge-verde">Dentro da meta</span></td>
+            </tr>
+            <tr>
+              <td>Satisfação do Cliente (NPS Interno)</td>
+              <td><strong>NPS</strong></td>
+              <td>72</td>
+              <td>≥ 60</td>
+              <td><span class="badge badge-verde">Satisfatório</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── OBSERVAÇÕES GERENCIAIS ── -->
+    <div class="section-title">OBSERVAÇÕES E COMENTÁRIOS DO GERENTE DE PROJETOS</div>
+    <div class="card">
+      <div class="card-body" style="line-height:1.8;">
+        <p>
+          O projeto encontra-se <strong>dentro do prazo</strong> e com <strong>alta qualidade de entrega</strong>,
+          registrando SPI de 1,03. A única área que requer atenção é o <strong>orçamento</strong>,
+          onde a previsão de custo final (EAC) aponta uma variação positiva de R$&nbsp;90.000,
+          motivada principalmente pelas horas extras na fase de integração com o ERP legado.
+        </p>
+        <p style="margin-top:8px;">
+          A solicitação de reserva de contingência (D01) é <strong>crítica</strong> e precisa ser
+          aprovada até <strong>20/06/2026</strong> para não impactar o cronograma da fase de testes.
+          Recomenda-se que o patrocinador priorize esta decisão na próxima reunião do Comitê.
+        </p>
+        <p style="margin-top:8px;">
+          A equipe está engajada e comprometida com a entrega do Go-Live em setembro/2026.
+          Todos os riscos mapeados possuem planos de resposta ativos e estão sendo monitorados semanalmente.
+        </p>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- ════════════════════════ RODAPÉ ════════════════════════════ -->
+  <div class="footer">
+    <span>Gerente de Projeto: Ana Paula Ferreira &nbsp;|&nbsp; PMO Corporativo</span>
+    <span>Próximo relatório: 17/07/2026</span>
+    <span>Resumo Executivo – Junho/2026 &nbsp;|&nbsp; Pág. 1 de 1</span>
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>
