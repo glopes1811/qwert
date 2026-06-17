@@ -16,6 +16,9 @@
       --border: #dbe3ee;
       --success: #1f9d55;
       --warning: #d97706;
+      --date-bg: #eef4ff;
+      --date-border: #c7d9f9;
+      --date-text: #1e40af;
     }
 
     * { box-sizing: border-box; }
@@ -33,12 +36,21 @@
       padding: 0 20px 32px;
     }
 
+    /* ── HEADER ── */
     .header {
       background: linear-gradient(135deg, var(--primary), var(--primary-2));
       color: white;
       border-radius: 18px;
       padding: 28px 32px;
       box-shadow: 0 10px 30px rgba(18, 59, 109, 0.18);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
     .header h1 {
@@ -53,10 +65,27 @@
       opacity: 0.95;
     }
 
+    .header-dates {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: right;
+    }
+
+    .header-date-item {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .header-date-item span {
+      font-weight: bold;
+      font-size: 15px;
+    }
+
     .meta {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
       margin-top: 22px;
     }
 
@@ -64,11 +93,16 @@
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.2);
       border-radius: 14px;
-      padding: 16px 18px;
+      padding: 14px 16px;
+    }
+
+    .meta-card.date-card {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.35);
     }
 
     .meta-card .label {
-      font-size: 12px;
+      font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       opacity: 0.85;
@@ -76,10 +110,49 @@
     }
 
     .meta-card .value {
-      font-size: 20px;
+      font-size: 17px;
       font-weight: bold;
+      line-height: 1.2;
     }
 
+    /* ── DATE BANNER ── */
+    .date-banner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .date-badge {
+      background: var(--date-bg);
+      border: 1px solid var(--date-border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .date-badge .db-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--date-text);
+      font-weight: 600;
+    }
+
+    .date-badge .db-value {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .date-badge .db-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── MAIN CONTENT ── */
     .content {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
@@ -124,6 +197,70 @@
       line-height: 1.4;
     }
 
+    /* ── MILESTONE DATE TABLE ── */
+    .milestone-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .milestone-table th {
+      background: var(--date-bg);
+      color: var(--date-text);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 2px solid var(--date-border);
+    }
+
+    .milestone-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .milestone-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .milestone-table tr:hover td {
+      background: #f8fbff;
+    }
+
+    .badge-done {
+      display: inline-block;
+      background: #d1fae5;
+      color: #065f46;
+      border-radius: 8px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge-pending {
+      display: inline-block;
+      background: #fef3c7;
+      color: #92400e;
+      border-radius: 8px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge-open {
+      display: inline-block;
+      background: #fee2e2;
+      color: #991b1b;
+      border-radius: 8px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* ── STATUS BOX ── */
     .status-box {
       display: flex;
       align-items: center;
@@ -150,6 +287,7 @@
       margin-bottom: 4px;
     }
 
+    /* ── HIGHLIGHT LIST ── */
     .highlight-list {
       display: grid;
       gap: 12px;
@@ -168,6 +306,19 @@
       margin-bottom: 4px;
     }
 
+    .highlight-item .hi-date {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--date-text);
+      font-weight: 600;
+      background: var(--date-bg);
+      border: 1px solid var(--date-border);
+      border-radius: 6px;
+      display: inline-block;
+      padding: 2px 8px;
+    }
+
+    /* ── ATTENTION ── */
     .attention {
       background: #fff7ed;
       border: 1px solid #fed7aa;
@@ -180,6 +331,7 @@
       color: var(--warning);
     }
 
+    /* ── TIMELINE ── */
     .timeline {
       display: grid;
       gap: 12px;
@@ -188,7 +340,7 @@
 
     .timeline-step {
       display: grid;
-      grid-template-columns: 24px 1fr;
+      grid-template-columns: 24px 1fr auto;
       gap: 12px;
       align-items: start;
     }
@@ -207,32 +359,102 @@
       margin-top: 2px;
     }
 
+    .timeline-marker.done {
+      background: var(--success);
+    }
+
     .timeline-content {
       background: #f8fbff;
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 12px 14px;
+      padding: 10px 14px;
     }
 
+    .timeline-date {
+      font-size: 12px;
+      color: var(--date-text);
+      background: var(--date-bg);
+      border: 1px solid var(--date-border);
+      border-radius: 8px;
+      padding: 4px 10px;
+      white-space: nowrap;
+      align-self: center;
+      font-weight: 600;
+    }
+
+    /* ── CADENCE TABLE ── */
+    .cadence-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .cadence-table th {
+      background: var(--primary);
+      color: white;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    .cadence-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .cadence-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .cadence-table tr:nth-child(even) td {
+      background: #f8fbff;
+    }
+
+    /* ── FOOTER ── */
     .footer-note {
       margin-top: 22px;
-      font-size: 14px;
+      font-size: 13px;
       color: var(--muted);
-      text-align: right;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     @media (max-width: 980px) {
-      .content, .meta {
+      .content, .meta, .date-banner {
         grid-template-columns: 1fr;
+      }
+      .meta {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .timeline-step {
+        grid-template-columns: 24px 1fr;
+      }
+      .timeline-date {
+        grid-column: 2;
       }
     }
   </style>
 </head>
 <body>
   <div class="page">
+
+    <!-- ══ HEADER ══ -->
     <section class="header">
-      <h1>Resumo Executivo</h1>
-      <p>Atualização do projeto com base nas informações do documento <strong>RESUMO EXECUTIVO</strong>.</p>
+      <div class="header-top">
+        <div>
+          <h1>Resumo Executivo</h1>
+          <p>Atualização do projeto com base nas informações do documento <strong>RESUMO EXECUTIVO</strong>.</p>
+        </div>
+        <div class="header-dates">
+          <div class="header-date-item">📅 Data do Reporte: <span id="report-date">—</span></div>
+          <div class="header-date-item">🕐 Última Atualização: <span id="last-update">—</span></div>
+        </div>
+      </div>
       <div class="meta">
         <div class="meta-card">
           <div class="label">Projeto</div>
@@ -246,11 +468,45 @@
           <div class="label">Fase Atual</div>
           <div class="value">Preparação para Go-live</div>
         </div>
+        <div class="meta-card date-card">
+          <div class="label">Período do Reporte</div>
+          <div class="value">Jun / 2025</div>
+        </div>
+        <div class="meta-card date-card">
+          <div class="label">Previsão Go-live</div>
+          <div class="value">A definir</div>
+        </div>
       </div>
     </section>
 
+    <!-- ══ DATE BANNER ══ -->
+    <div class="date-banner">
+      <div class="date-badge">
+        <div class="db-label">📋 Data do Reporte</div>
+        <div class="db-value" id="banner-report-date">—</div>
+        <div class="db-sub">Gerado automaticamente</div>
+      </div>
+      <div class="date-badge">
+        <div class="db-label">📆 Período de Referência</div>
+        <div class="db-value">Junho 2025</div>
+        <div class="db-sub">Ciclo atual do projeto</div>
+      </div>
+      <div class="date-badge">
+        <div class="db-label">✅ Último Marco Concluído</div>
+        <div class="db-value">UAT Concluído</div>
+        <div class="db-sub">Data: Jun / 2025</div>
+      </div>
+      <div class="date-badge">
+        <div class="db-label">🚀 Próxima Reunião Executiva</div>
+        <div class="db-value">A confirmar</div>
+        <div class="db-sub">Alinhar data com equipe</div>
+      </div>
+    </div>
+
+    <!-- ══ MAIN CONTENT ══ -->
     <section class="content">
       <div class="column">
+
         <article class="card">
           <h2>Status Geral</h2>
           <div class="status-box">
@@ -260,6 +516,56 @@
               O projeto concluiu as etapas de validação, melhorias, treinamento e homologação, avançando para as atividades finais de aceite e preparação produtiva.
             </div>
           </div>
+        </article>
+
+        <article class="card">
+          <h2>Resumo de Datas — Marcos Concluídos</h2>
+          <table class="milestone-table">
+            <thead>
+              <tr>
+                <th>Marco / Entrega</th>
+                <th>Data de Conclusão</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Validação dos fluxos operacionais do Empower</td>
+                <td>Jun / 2025</td>
+                <td><span class="badge-done">Concluído</span></td>
+              </tr>
+              <tr>
+                <td>Revisão das regras funcionais (SAP PM)</td>
+                <td>Jun / 2025</td>
+                <td><span class="badge-done">Concluído</span></td>
+              </tr>
+              <tr>
+                <td>Ajustes no fluxo de informações de ativos</td>
+                <td>Jun / 2025</td>
+                <td><span class="badge-done">Concluído</span></td>
+              </tr>
+              <tr>
+                <td>Inclusão botão alteração System Status (MSPN → MSPR)</td>
+                <td>Jun / 2025</td>
+                <td><span class="badge-done">Concluído</span></td>
+              </tr>
+              <tr>
+                <td>Treinamento</td>
+                <td>Jun / 2025</td>
+                <td><span class="badge-done">Concluído</span></td>
+              </tr>
+              <tr>
+                <td>Testes de Homologação UAT</td>
+                <td>Jun / 2025</td>
+                <td><span class="badge-done">Concluído</span></td>
+              </tr>
+              <tr>
+                <td>Estimativa de requisito</td>
+                <td>—</td>
+                <td><span class="badge-open">Em aberto</span></td>
+              </tr>
+            </tbody>
+          </table>
         </article>
 
         <article class="card">
@@ -273,7 +579,7 @@
           <h3>Melhorias solicitadas e implementadas</h3>
           <ul>
             <li>Ajustes no fluxo de informações de ativos;</li>
-            <li>Inclusão de botão para alteração do <strong>System Status</strong> de <strong>MSPN</strong> para <strong>MSPR</strong> na tela <strong>“Minhas Notas”</strong>.</li>
+            <li>Inclusão de botão para alteração do <strong>System Status</strong> de <strong>MSPN</strong> para <strong>MSPR</strong> na tela <strong>"Minhas Notas"</strong>.</li>
           </ul>
 
           <h3>Capacitação e validação</h3>
@@ -284,42 +590,69 @@
         </article>
 
         <article class="card">
-          <h2>Cronograma Atualizado</h2>
-          <p>O cronograma foi revisado conforme a conclusão das etapas de desenho, melhorias, treinamento e homologação. O projeto segue para a fase final de aceite e preparação para entrada em produção.</p>
+          <h2>Cronograma — Próximos Marcos com Datas Alvo</h2>
+          <p style="margin:0 0 14px;font-size:14px;color:var(--muted);">Cronograma revisado conforme conclusão das etapas de desenho, melhorias, treinamento e homologação.</p>
           <div class="timeline">
             <div class="timeline-step">
               <div class="timeline-marker">1</div>
               <div class="timeline-content">Aprovação do Termo de Aceite UAT</div>
+              <div class="timeline-date">📅 A definir</div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">2</div>
               <div class="timeline-content">Documentação do Plano de Cutover</div>
+              <div class="timeline-date">📅 A definir</div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">3</div>
               <div class="timeline-content">Instalação dos Add-Ons em PRD</div>
+              <div class="timeline-date">📅 A definir</div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">4</div>
               <div class="timeline-content">Configurações técnicas e funcionais finais</div>
+              <div class="timeline-date">📅 A definir</div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">5</div>
-              <div class="timeline-content">Go-live</div>
+              <div class="timeline-content"><strong>Go-live</strong></div>
+              <div class="timeline-date">🚀 A definir</div>
             </div>
           </div>
         </article>
+
       </div>
 
       <div class="column">
+
         <article class="card">
           <h2>Próximos Passos</h2>
           <div class="highlight-list">
-            <div class="highlight-item"><strong>1. Aceite UAT</strong>Aprovação formal do Termo de Aceite UAT.</div>
-            <div class="highlight-item"><strong>2. Cutover</strong>Preparação e consolidação da documentação do Plano de Cutover.</div>
-            <div class="highlight-item"><strong>3. Produção</strong>Instalação dos Add-Ons no ambiente PRD.</div>
-            <div class="highlight-item"><strong>4. Ajustes Finais</strong>Execução das configurações técnicas e funcionais.</div>
-            <div class="highlight-item"><strong>5. Entrada em Operação</strong>Realização do Go-live.</div>
+            <div class="highlight-item">
+              <strong>1. Aceite UAT</strong>
+              Aprovação formal do Termo de Aceite UAT.
+              <div class="hi-date">📅 Data alvo: A definir</div>
+            </div>
+            <div class="highlight-item">
+              <strong>2. Cutover</strong>
+              Preparação e consolidação da documentação do Plano de Cutover.
+              <div class="hi-date">📅 Data alvo: A definir</div>
+            </div>
+            <div class="highlight-item">
+              <strong>3. Produção</strong>
+              Instalação dos Add-Ons no ambiente PRD.
+              <div class="hi-date">📅 Data alvo: A definir</div>
+            </div>
+            <div class="highlight-item">
+              <strong>4. Ajustes Finais</strong>
+              Execução das configurações técnicas e funcionais.
+              <div class="hi-date">📅 Data alvo: A definir</div>
+            </div>
+            <div class="highlight-item">
+              <strong>5. Entrada em Operação</strong>
+              Realização do Go-live.
+              <div class="hi-date">🚀 Data alvo: A definir</div>
+            </div>
           </div>
         </article>
 
@@ -328,6 +661,46 @@
           <div class="attention">
             <strong>Ponto de atenção:</strong> permanece em aberto a definição da estimativa de requisito, item importante para visibilidade completa do planejamento.
           </div>
+        </article>
+
+        <article class="card">
+          <h2>Cadência de Status Executivo</h2>
+          <table class="cadence-table">
+            <thead>
+              <tr>
+                <th>Evento</th>
+                <th>Frequência</th>
+                <th>Próxima Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Reunião de Status Executivo</td>
+                <td>Quinzenal</td>
+                <td>A confirmar</td>
+              </tr>
+              <tr>
+                <td>Revisão do Cronograma</td>
+                <td>Semanal</td>
+                <td>A confirmar</td>
+              </tr>
+              <tr>
+                <td>Atualização do Reporte</td>
+                <td>Semanal</td>
+                <td>A confirmar</td>
+              </tr>
+              <tr>
+                <td>Aprovação Termo de Aceite UAT</td>
+                <td>Único</td>
+                <td>A definir</td>
+              </tr>
+              <tr>
+                <td>Go-live</td>
+                <td>Único</td>
+                <td>A definir</td>
+              </tr>
+            </tbody>
+          </table>
         </article>
 
         <article class="card">
@@ -345,10 +718,27 @@
           <h2>Mensagem Executiva</h2>
           <p>O projeto mantém trajetória positiva, com entregas relevantes concluídas e avanço para a etapa final de preparação produtiva. O foco do próximo ciclo está na formalização do aceite, preparação do ambiente de produção e execução do go-live.</p>
         </article>
+
       </div>
     </section>
 
-    <div class="footer-note">Documento gerado com base no arquivo “RESUMO EXECUTIVO”.</div>
+    <div class="footer-note">
+      <span>Documento gerado com base no arquivo "RESUMO EXECUTIVO" — Empower / SAP PM</span>
+      <span id="footer-date">—</span>
+    </div>
   </div>
+
+  <script>
+    // Populate dynamic date fields with today's date
+    const now = new Date();
+    const opts = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const dateStr = now.toLocaleDateString('pt-BR', opts);
+    const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+    document.getElementById('report-date').textContent = dateStr;
+    document.getElementById('last-update').textContent = dateStr + ' ' + timeStr;
+    document.getElementById('banner-report-date').textContent = dateStr;
+    document.getElementById('footer-date').textContent = 'Reporte gerado em: ' + dateStr + ' às ' + timeStr;
+  </script>
 </body>
 </html>
