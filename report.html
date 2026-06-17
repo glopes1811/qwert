@@ -55,9 +55,16 @@
 
     .meta {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
       margin-top: 22px;
+    }
+
+    .meta-dates {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 12px;
     }
 
     .meta-card {
@@ -222,7 +229,13 @@
     }
 
     @media (max-width: 980px) {
-      .content, .meta {
+      .content, .meta, .meta-dates {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .content, .meta, .meta-dates {
         grid-template-columns: 1fr;
       }
     }
@@ -243,8 +256,30 @@
           <div class="value">Em andamento</div>
         </div>
         <div class="meta-card">
+          <div class="label">🗓️ Reunião Executiva</div>
+          <div class="value">18/06/2026</div>
+        </div>
+        <div class="meta-card">
           <div class="label">Fase Atual</div>
           <div class="value">Preparação para Go-live</div>
+        </div>
+      </div>
+      <div class="meta-dates">
+        <div class="meta-card">
+          <div class="label">📅 Data do Reporte</div>
+          <div class="value">17/06/2026</div>
+        </div>
+        <div class="meta-card">
+          <div class="label">📆 Período de Referência</div>
+          <div class="value">Jun/2026</div>
+        </div>
+        <div class="meta-card">
+          <div class="label">🔄 Última Atualização</div>
+          <div class="value">17/06/2026</div>
+        </div>
+        <div class="meta-card">
+          <div class="label">🚀 Previsão de Go-live</div>
+          <div class="value">Jul/2026</div>
         </div>
       </div>
     </section>
@@ -284,28 +319,38 @@
         </article>
 
         <article class="card">
+          <h2>Marcos Concluídos</h2>
+          <div class="highlight-list">
+            <div class="highlight-item"><strong>✅ Flow Design</strong>Validação dos fluxos operacionais e regras funcionais. <span style="font-size:12px;color:var(--success);">Concluído: Mai/2026</span></div>
+            <div class="highlight-item"><strong>✅ Melhorias Implementadas</strong>Ajustes de fluxo e inclusão de botão MSPN→MSPR. <span style="font-size:12px;color:var(--success);">Concluído: Jun/2026</span></div>
+            <div class="highlight-item"><strong>✅ Treinamento</strong>Capacitação dos usuários finalizada. <span style="font-size:12px;color:var(--success);">Concluído: Jun/2026</span></div>
+            <div class="highlight-item"><strong>✅ Homologação UAT</strong>Testes de Homologação concluídos com sucesso. <span style="font-size:12px;color:var(--success);">Concluído: 16/06/2026</span></div>
+          </div>
+        </article>
+
+        <article class="card">
           <h2>Cronograma Atualizado</h2>
           <p>O cronograma foi revisado conforme a conclusão das etapas de desenho, melhorias, treinamento e homologação. O projeto segue para a fase final de aceite e preparação para entrada em produção.</p>
           <div class="timeline">
             <div class="timeline-step">
               <div class="timeline-marker">1</div>
-              <div class="timeline-content">Aprovação do Termo de Aceite UAT</div>
+              <div class="timeline-content">Aprovação do Termo de Aceite UAT <span style="display:block;font-size:12px;color:var(--muted);margin-top:4px;">🎯 Alvo: 20/06/2026</span></div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">2</div>
-              <div class="timeline-content">Documentação do Plano de Cutover</div>
+              <div class="timeline-content">Documentação do Plano de Cutover <span style="display:block;font-size:12px;color:var(--muted);margin-top:4px;">🎯 Alvo: 25/06/2026</span></div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">3</div>
-              <div class="timeline-content">Instalação dos Add-Ons em PRD</div>
+              <div class="timeline-content">Instalação dos Add-Ons em PRD <span style="display:block;font-size:12px;color:var(--muted);margin-top:4px;">🎯 Alvo: 30/06/2026</span></div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">4</div>
-              <div class="timeline-content">Configurações técnicas e funcionais finais</div>
+              <div class="timeline-content">Configurações técnicas e funcionais finais <span style="display:block;font-size:12px;color:var(--muted);margin-top:4px;">🎯 Alvo: 07/07/2026</span></div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">5</div>
-              <div class="timeline-content">Go-live</div>
+              <div class="timeline-content">Go-live <span style="display:block;font-size:12px;color:var(--success);margin-top:4px;font-weight:bold;">🚀 Previsão: Jul/2026</span></div>
             </div>
           </div>
         </article>
@@ -315,11 +360,11 @@
         <article class="card">
           <h2>Próximos Passos</h2>
           <div class="highlight-list">
-            <div class="highlight-item"><strong>1. Aceite UAT</strong>Aprovação formal do Termo de Aceite UAT.</div>
-            <div class="highlight-item"><strong>2. Cutover</strong>Preparação e consolidação da documentação do Plano de Cutover.</div>
-            <div class="highlight-item"><strong>3. Produção</strong>Instalação dos Add-Ons no ambiente PRD.</div>
-            <div class="highlight-item"><strong>4. Ajustes Finais</strong>Execução das configurações técnicas e funcionais.</div>
-            <div class="highlight-item"><strong>5. Entrada em Operação</strong>Realização do Go-live.</div>
+            <div class="highlight-item"><strong>1. Aceite UAT</strong>Aprovação formal do Termo de Aceite UAT. <span style="font-size:12px;color:var(--muted);">🎯 Alvo: 20/06/2026</span></div>
+            <div class="highlight-item"><strong>2. Cutover</strong>Preparação e consolidação da documentação do Plano de Cutover. <span style="font-size:12px;color:var(--muted);">🎯 Alvo: 25/06/2026</span></div>
+            <div class="highlight-item"><strong>3. Produção</strong>Instalação dos Add-Ons no ambiente PRD. <span style="font-size:12px;color:var(--muted);">🎯 Alvo: 30/06/2026</span></div>
+            <div class="highlight-item"><strong>4. Ajustes Finais</strong>Execução das configurações técnicas e funcionais. <span style="font-size:12px;color:var(--muted);">🎯 Alvo: 07/07/2026</span></div>
+            <div class="highlight-item"><strong>5. Entrada em Operação</strong>Realização do Go-live. <span style="font-size:12px;color:var(--success);font-weight:bold;">🚀 Previsão: Jul/2026</span></div>
           </div>
         </article>
 
