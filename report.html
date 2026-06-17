@@ -221,9 +221,133 @@
       text-align: right;
     }
 
+    .date-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .date-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: 0 4px 12px rgba(16, 24, 40, 0.05);
+    }
+
+    .date-card .date-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .date-card .date-value {
+      font-size: 17px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .date-card .date-value.placeholder {
+      color: var(--warning);
+      font-style: italic;
+    }
+
+    .milestone-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .milestone-table th {
+      text-align: left;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .milestone-table td {
+      padding: 10px 10px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .milestone-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .badge-done { background: #d1fae5; color: #065f46; }
+    .badge-pending { background: #fef3c7; color: #92400e; }
+    .badge-next { background: #dbeafe; color: #1e40af; }
+
+    .td-date {
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .td-date.placeholder {
+      color: var(--warning);
+      font-style: italic;
+    }
+
+    .exec-meeting-box {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 14px;
+      padding: 16px 18px;
+    }
+
+    .exec-meeting-icon {
+      font-size: 28px;
+      flex: 0 0 auto;
+    }
+
+    .exec-meeting-box .em-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--primary-2);
+      margin-bottom: 4px;
+    }
+
+    .exec-meeting-box .em-date {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .exec-meeting-box .em-date.placeholder {
+      color: var(--warning);
+      font-style: italic;
+    }
+
     @media (max-width: 980px) {
-      .content, .meta {
+      .content, .meta, .date-bar {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .date-bar {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
@@ -249,6 +373,25 @@
       </div>
     </section>
 
+    <div class="date-bar">
+      <div class="date-card">
+        <div class="date-label">📅 Data do Reporte</div>
+        <div class="date-value" id="report-date">—</div>
+      </div>
+      <div class="date-card">
+        <div class="date-label">📆 Período de Referência</div>
+        <div class="date-value placeholder">[a preencher]</div>
+      </div>
+      <div class="date-card">
+        <div class="date-label">🔄 Última Atualização</div>
+        <div class="date-value" id="last-update">—</div>
+      </div>
+      <div class="date-card">
+        <div class="date-label">🚀 Previsão de Go-live</div>
+        <div class="date-value placeholder">[a confirmar]</div>
+      </div>
+    </div>
+
     <section class="content">
       <div class="column">
         <article class="card">
@@ -263,55 +406,105 @@
         </article>
 
         <article class="card">
-          <h2>Atividades Concluídas</h2>
-          <h3>Flow Design</h3>
-          <ul>
-            <li>Validação dos fluxos operacionais do Empower;</li>
-            <li>Revisão e refinamento das regras funcionais dos processos integrados ao SAP PM.</li>
-          </ul>
-
-          <h3>Melhorias solicitadas e implementadas</h3>
-          <ul>
-            <li>Ajustes no fluxo de informações de ativos;</li>
-            <li>Inclusão de botão para alteração do <strong>System Status</strong> de <strong>MSPN</strong> para <strong>MSPR</strong> na tela <strong>“Minhas Notas”</strong>.</li>
-          </ul>
-
-          <h3>Capacitação e validação</h3>
-          <ul>
-            <li>Treinamento concluído;</li>
-            <li>Testes de Homologação UAT concluídos.</li>
-          </ul>
+          <h2>Marcos Concluídos</h2>
+          <table class="milestone-table">
+            <thead>
+              <tr>
+                <th>Marco</th>
+                <th>Descrição</th>
+                <th>Data</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Flow Design</td>
+                <td>Validação dos fluxos operacionais do Empower e refinamento das regras funcionais integradas ao SAP PM</td>
+                <td class="td-date placeholder">[a confirmar]</td>
+                <td><span class="badge badge-done">Concluído</span></td>
+              </tr>
+              <tr>
+                <td>Melhorias</td>
+                <td>Ajustes no fluxo de ativos e inclusão de botão de alteração de System Status (MSPN → MSPR)</td>
+                <td class="td-date placeholder">[a confirmar]</td>
+                <td><span class="badge badge-done">Concluído</span></td>
+              </tr>
+              <tr>
+                <td>Treinamento</td>
+                <td>Capacitação das equipes concluída</td>
+                <td class="td-date placeholder">[a confirmar]</td>
+                <td><span class="badge badge-done">Concluído</span></td>
+              </tr>
+              <tr>
+                <td>UAT</td>
+                <td>Testes de Homologação (UAT) concluídos com sucesso</td>
+                <td class="td-date placeholder">[a confirmar]</td>
+                <td><span class="badge badge-done">Concluído</span></td>
+              </tr>
+            </tbody>
+          </table>
         </article>
 
         <article class="card">
           <h2>Cronograma Atualizado</h2>
           <p>O cronograma foi revisado conforme a conclusão das etapas de desenho, melhorias, treinamento e homologação. O projeto segue para a fase final de aceite e preparação para entrada em produção.</p>
-          <div class="timeline">
-            <div class="timeline-step">
-              <div class="timeline-marker">1</div>
-              <div class="timeline-content">Aprovação do Termo de Aceite UAT</div>
-            </div>
-            <div class="timeline-step">
-              <div class="timeline-marker">2</div>
-              <div class="timeline-content">Documentação do Plano de Cutover</div>
-            </div>
-            <div class="timeline-step">
-              <div class="timeline-marker">3</div>
-              <div class="timeline-content">Instalação dos Add-Ons em PRD</div>
-            </div>
-            <div class="timeline-step">
-              <div class="timeline-marker">4</div>
-              <div class="timeline-content">Configurações técnicas e funcionais finais</div>
-            </div>
-            <div class="timeline-step">
-              <div class="timeline-marker">5</div>
-              <div class="timeline-content">Go-live</div>
-            </div>
-          </div>
+          <table class="milestone-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Atividade</th>
+                <th>Data-Alvo</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Aprovação do Termo de Aceite UAT</td>
+                <td class="td-date placeholder">[a confirmar]</td>
+                <td><span class="badge badge-pending">Pendente</span></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Documentação do Plano de Cutover</td>
+                <td class="td-date placeholder">[a confirmar]</td>
+                <td><span class="badge badge-pending">Pendente</span></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Instalação dos Add-Ons em PRD</td>
+                <td class="td-date placeholder">[a confirmar]</td>
+                <td><span class="badge badge-next">Planejado</span></td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Configurações técnicas e funcionais finais</td>
+                <td class="td-date placeholder">[a confirmar]</td>
+                <td><span class="badge badge-next">Planejado</span></td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td><strong>Go-live</strong></td>
+                <td class="td-date placeholder">[a confirmar]</td>
+                <td><span class="badge badge-next">Planejado</span></td>
+              </tr>
+            </tbody>
+          </table>
         </article>
       </div>
 
       <div class="column">
+        <article class="card">
+          <h2>Próxima Reunião Executiva</h2>
+          <div class="exec-meeting-box">
+            <div class="exec-meeting-icon">📋</div>
+            <div>
+              <div class="em-label">Data da reunião executiva</div>
+              <div class="em-date placeholder">[a agendar]</div>
+            </div>
+          </div>
+        </article>
+
         <article class="card">
           <h2>Próximos Passos</h2>
           <div class="highlight-list">
@@ -348,7 +541,21 @@
       </div>
     </section>
 
-    <div class="footer-note">Documento gerado com base no arquivo “RESUMO EXECUTIVO”.</div>
+    <div class="footer-note">Documento gerado com base no arquivo "RESUMO EXECUTIVO" · <span id="footer-date"></span></div>
   </div>
+
+  <script>
+    (function () {
+      var now = new Date();
+      var opts = { day: '2-digit', month: '2-digit', year: 'numeric' };
+      var formatted = now.toLocaleDateString('pt-BR', opts);
+      var el = document.getElementById('report-date');
+      if (el) el.textContent = formatted;
+      var el2 = document.getElementById('last-update');
+      if (el2) el2.textContent = formatted;
+      var el3 = document.getElementById('footer-date');
+      if (el3) el3.textContent = 'Gerado em ' + formatted;
+    })();
+  </script>
 </body>
 </html>
