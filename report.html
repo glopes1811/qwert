@@ -214,6 +214,70 @@
       padding: 12px 14px;
     }
 
+    .date-banner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .date-chip {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 12px;
+      padding: 12px 16px;
+    }
+
+    .date-chip .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.8;
+      margin-bottom: 6px;
+    }
+
+    .date-chip .value {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .milestone-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .milestone-table th {
+      text-align: left;
+      color: var(--primary);
+      padding: 8px 10px;
+      border-bottom: 2px solid var(--border);
+      font-size: 13px;
+    }
+
+    .milestone-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .milestone-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .badge-done   { background: #d1fae5; color: #065f46; }
+    .badge-open   { background: #fef3c7; color: #92400e; }
+    .badge-next   { background: #dbeafe; color: #1e3a8a; }
+
     .footer-note {
       margin-top: 22px;
       font-size: 14px;
@@ -247,6 +311,24 @@
           <div class="value">Preparação para Go-live</div>
         </div>
       </div>
+      <div class="date-banner">
+        <div class="date-chip">
+          <div class="label">Data do Reporte</div>
+          <div class="value">17/06/2026</div>
+        </div>
+        <div class="date-chip">
+          <div class="label">Período de Referência</div>
+          <div class="value">Jun 2026</div>
+        </div>
+        <div class="date-chip">
+          <div class="label">Última Atualização</div>
+          <div class="value">17/06/2026</div>
+        </div>
+        <div class="date-chip">
+          <div class="label">Previsão Go-live</div>
+          <div class="value">Julho 2026</div>
+        </div>
+      </div>
     </section>
 
     <section class="content">
@@ -264,23 +346,42 @@
 
         <article class="card">
           <h2>Atividades Concluídas</h2>
-          <h3>Flow Design</h3>
-          <ul>
-            <li>Validação dos fluxos operacionais do Empower;</li>
-            <li>Revisão e refinamento das regras funcionais dos processos integrados ao SAP PM.</li>
-          </ul>
-
-          <h3>Melhorias solicitadas e implementadas</h3>
-          <ul>
-            <li>Ajustes no fluxo de informações de ativos;</li>
-            <li>Inclusão de botão para alteração do <strong>System Status</strong> de <strong>MSPN</strong> para <strong>MSPR</strong> na tela <strong>“Minhas Notas”</strong>.</li>
-          </ul>
-
-          <h3>Capacitação e validação</h3>
-          <ul>
-            <li>Treinamento concluído;</li>
-            <li>Testes de Homologação UAT concluídos.</li>
-          </ul>
+          <table class="milestone-table">
+            <thead>
+              <tr>
+                <th>Atividade</th>
+                <th>Conclusão</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Flow Design — Validação dos fluxos Empower</td>
+                <td>Abr 2026</td>
+                <td><span class="badge badge-done">Concluído</span></td>
+              </tr>
+              <tr>
+                <td>Refinamento das regras SAP PM</td>
+                <td>Abr 2026</td>
+                <td><span class="badge badge-done">Concluído</span></td>
+              </tr>
+              <tr>
+                <td>Melhorias: fluxo de ativos e botão MSPN→MSPR</td>
+                <td>Mai 2026</td>
+                <td><span class="badge badge-done">Concluído</span></td>
+              </tr>
+              <tr>
+                <td>Treinamento dos usuários</td>
+                <td>Mai 2026</td>
+                <td><span class="badge badge-done">Concluído</span></td>
+              </tr>
+              <tr>
+                <td>Testes de Homologação UAT</td>
+                <td>Jun 2026</td>
+                <td><span class="badge badge-done">Concluído</span></td>
+              </tr>
+            </tbody>
+          </table>
         </article>
 
         <article class="card">
@@ -289,23 +390,23 @@
           <div class="timeline">
             <div class="timeline-step">
               <div class="timeline-marker">1</div>
-              <div class="timeline-content">Aprovação do Termo de Aceite UAT</div>
+              <div class="timeline-content"><strong>Aprovação do Termo de Aceite UAT</strong><br/><small>Previsto: 20/06/2026</small></div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">2</div>
-              <div class="timeline-content">Documentação do Plano de Cutover</div>
+              <div class="timeline-content"><strong>Documentação do Plano de Cutover</strong><br/><small>Previsto: 27/06/2026</small></div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">3</div>
-              <div class="timeline-content">Instalação dos Add-Ons em PRD</div>
+              <div class="timeline-content"><strong>Instalação dos Add-Ons em PRD</strong><br/><small>Previsto: 04/07/2026</small></div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">4</div>
-              <div class="timeline-content">Configurações técnicas e funcionais finais</div>
+              <div class="timeline-content"><strong>Configurações técnicas e funcionais finais</strong><br/><small>Previsto: 11/07/2026</small></div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">5</div>
-              <div class="timeline-content">Go-live</div>
+              <div class="timeline-content"><strong>Go-live</strong><br/><small>Previsto: 18/07/2026</small></div>
             </div>
           </div>
         </article>
@@ -315,11 +416,11 @@
         <article class="card">
           <h2>Próximos Passos</h2>
           <div class="highlight-list">
-            <div class="highlight-item"><strong>1. Aceite UAT</strong>Aprovação formal do Termo de Aceite UAT.</div>
-            <div class="highlight-item"><strong>2. Cutover</strong>Preparação e consolidação da documentação do Plano de Cutover.</div>
-            <div class="highlight-item"><strong>3. Produção</strong>Instalação dos Add-Ons no ambiente PRD.</div>
-            <div class="highlight-item"><strong>4. Ajustes Finais</strong>Execução das configurações técnicas e funcionais.</div>
-            <div class="highlight-item"><strong>5. Entrada em Operação</strong>Realização do Go-live.</div>
+            <div class="highlight-item"><strong>1. Aceite UAT — 20/06/2026</strong>Aprovação formal do Termo de Aceite UAT.</div>
+            <div class="highlight-item"><strong>2. Cutover — 27/06/2026</strong>Preparação e consolidação da documentação do Plano de Cutover.</div>
+            <div class="highlight-item"><strong>3. Produção — 04/07/2026</strong>Instalação dos Add-Ons no ambiente PRD.</div>
+            <div class="highlight-item"><strong>4. Ajustes Finais — 11/07/2026</strong>Execução das configurações técnicas e funcionais.</div>
+            <div class="highlight-item"><strong>5. Go-live — 18/07/2026</strong>Realização do Go-live.</div>
           </div>
         </article>
 
@@ -348,7 +449,7 @@
       </div>
     </section>
 
-    <div class="footer-note">Documento gerado com base no arquivo “RESUMO EXECUTIVO”.</div>
+    <div class="footer-note">Documento gerado em 17/06/2026 com base no arquivo "RESUMO EXECUTIVO" — Período de referência: Junho 2026.</div>
   </div>
 </body>
 </html>
