@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resumo Executivo</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --primary: #123b6d;
+      --primary-2: #1f5fa8;
+      --accent: #00a3a3;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #dbe3ee;
+      --success: #1f9d55;
+      --warning: #d97706;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .page {
+      max-width: 1280px;
+      margin: 24px auto;
+      padding: 0 20px 32px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: white;
+      border-radius: 18px;
+      padding: 28px 32px;
+      box-shadow: 0 10px 30px rgba(18, 59, 109, 0.18);
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 34px;
+      letter-spacing: 0.5px;
+    }
+
+    .header p {
+      margin: 10px 0 0;
+      font-size: 16px;
+      opacity: 0.95;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .meta-card {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 14px;
+      padding: 16px 18px;
+    }
+
+    .meta-card .label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.85;
+      margin-bottom: 8px;
+    }
+
+    .meta-card .value {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 20px;
+      margin-top: 22px;
+    }
+
+    .column {
+      display: grid;
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 24px;
+      box-shadow: 0 6px 18px rgba(16, 24, 40, 0.05);
+    }
+
+    .card h2 {
+      margin: 0 0 16px;
+      color: var(--primary);
+      font-size: 20px;
+      border-left: 5px solid var(--accent);
+      padding-left: 12px;
+    }
+
+    .card h3 {
+      margin: 18px 0 8px;
+      color: var(--primary-2);
+      font-size: 16px;
+    }
+
+    ul {
+      margin: 8px 0 0 18px;
+      padding: 0;
+    }
+
+    li {
+      margin: 8px 0;
+      line-height: 1.4;
+    }
+
+    .status-box {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: #eef9f2;
+      border: 1px solid #cfead8;
+    }
+
+    .status-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 6px rgba(31, 157, 85, 0.15);
+      flex: 0 0 auto;
+    }
+
+    .status-box strong {
+      display: block;
+      color: var(--success);
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .highlight-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .highlight-item {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: #fbfdff;
+    }
+
+    .highlight-item strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .attention {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 14px;
+      padding: 16px 18px;
+      color: #9a3412;
+    }
+
+    .attention strong {
+      color: var(--warning);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .timeline-step {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .timeline-marker {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--primary-2);
+      color: white;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-top: 2px;
+    }
+
+    .timeline-content {
+      background: #f8fbff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+
+    .footer-note {
+      margin-top: 22px;
+      font-size: 14px;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    @media (max-width: 980px) {
+      .content, .meta {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="header">
+      <h1>Resumo Executivo</h1>
+      <p>Atualização do projeto com base nas informações do documento <strong>RESUMO EXECUTIVO</strong>.</p>
+      <div class="meta">
+        <div class="meta-card">
+          <div class="label">Projeto</div>
+          <div class="value">Empower / SAP PM</div>
+        </div>
+        <div class="meta-card">
+          <div class="label">Status</div>
+          <div class="value">Em andamento</div>
+        </div>
+        <div class="meta-card">
+          <div class="label">Fase Atual</div>
+          <div class="value">Preparação para Go-live</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="column">
+        <article class="card">
+          <h2>Status Geral</h2>
+          <div class="status-box">
+            <div class="status-dot"></div>
+            <div>
+              <strong>Evolução consistente</strong>
+              O projeto concluiu as etapas de validação, melhorias, treinamento e homologação, avançando para as atividades finais de aceite e preparação produtiva.
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Atividades Concluídas</h2>
+          <h3>Flow Design</h3>
+          <ul>
+            <li>Validação dos fluxos operacionais do Empower;</li>
+            <li>Revisão e refinamento das regras funcionais dos processos integrados ao SAP PM.</li>
+          </ul>
+
+          <h3>Melhorias solicitadas e implementadas</h3>
+          <ul>
+            <li>Ajustes no fluxo de informações de ativos;</li>
+            <li>Inclusão de botão para alteração do <strong>System Status</strong> de <strong>MSPN</strong> para <strong>MSPR</strong> na tela <strong>“Minhas Notas”</strong>.</li>
+          </ul>
+
+          <h3>Capacitação e validação</h3>
+          <ul>
+            <li>Treinamento concluído;</li>
+            <li>Testes de Homologação UAT concluídos.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>Cronograma Atualizado</h2>
+          <p>O cronograma foi revisado conforme a conclusão das etapas de desenho, melhorias, treinamento e homologação. O projeto segue para a fase final de aceite e preparação para entrada em produção.</p>
+          <div class="timeline">
+            <div class="timeline-step">
+              <div class="timeline-marker">1</div>
+              <div class="timeline-content">Aprovação do Termo de Aceite UAT</div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">2</div>
+              <div class="timeline-content">Documentação do Plano de Cutover</div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">3</div>
+              <div class="timeline-content">Instalação dos Add-Ons em PRD</div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">4</div>
+              <div class="timeline-content">Configurações técnicas e funcionais finais</div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">5</div>
+              <div class="timeline-content">Go-live</div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="column">
+        <article class="card">
+          <h2>Próximos Passos</h2>
+          <div class="highlight-list">
+            <div class="highlight-item"><strong>1. Aceite UAT</strong>Aprovação formal do Termo de Aceite UAT.</div>
+            <div class="highlight-item"><strong>2. Cutover</strong>Preparação e consolidação da documentação do Plano de Cutover.</div>
+            <div class="highlight-item"><strong>3. Produção</strong>Instalação dos Add-Ons no ambiente PRD.</div>
+            <div class="highlight-item"><strong>4. Ajustes Finais</strong>Execução das configurações técnicas e funcionais.</div>
+            <div class="highlight-item"><strong>5. Entrada em Operação</strong>Realização do Go-live.</div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Pontos em Aberto</h2>
+          <div class="attention">
+            <strong>Ponto de atenção:</strong> permanece em aberto a definição da estimativa de requisito, item importante para visibilidade completa do planejamento.
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Destaques Executivos</h2>
+          <ul>
+            <li>Fluxos operacionais validados;</li>
+            <li>Regras funcionais refinadas;</li>
+            <li>Melhorias demandadas pelo negócio implementadas;</li>
+            <li>UAT concluído com avanço para etapa de aceite;</li>
+            <li>Projeto em preparação para go-live.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>Mensagem Executiva</h2>
+          <p>O projeto mantém trajetória positiva, com entregas relevantes concluídas e avanço para a etapa final de preparação produtiva. O foco do próximo ciclo está na formalização do aceite, preparação do ambiente de produção e execução do go-live.</p>
+        </article>
+      </div>
+    </section>
+
+    <div class="footer-note">Documento gerado com base no arquivo “RESUMO EXECUTIVO”.</div>
+  </div>
+</body>
+</html>
