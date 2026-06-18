@@ -221,8 +221,79 @@
       text-align: right;
     }
 
+    .date-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .date-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: 0 4px 12px rgba(16, 24, 40, 0.05);
+    }
+
+    .date-card .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .date-card .value {
+      font-size: 17px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .date-card .value.placeholder {
+      color: var(--warning);
+      font-style: italic;
+      font-size: 15px;
+    }
+
+    .milestone-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 14px;
+      background: #f8fbff;
+      margin: 6px 0;
+    }
+
+    .milestone-item span {
+      flex: 1;
+      font-size: 14px;
+    }
+
+    .milestone-date {
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--success);
+      white-space: nowrap;
+    }
+
+    .milestone-date.placeholder {
+      color: var(--warning);
+      font-style: italic;
+    }
+
+    .timeline-content .tl-date {
+      font-size: 12px;
+      color: var(--warning);
+      font-style: italic;
+      margin-top: 4px;
+    }
+
     @media (max-width: 980px) {
-      .content, .meta {
+      .content, .meta, .date-row {
         grid-template-columns: 1fr;
       }
     }
@@ -232,7 +303,7 @@
   <div class="page">
     <section class="header">
       <h1>Resumo Executivo</h1>
-      <p>Atualização do projeto com base nas informações do documento <strong>RESUMO EXECUTIVO</strong>.</p>
+      <p>Atualizado em <strong>17/06/2026</strong> — o projeto segue em evolução consistente, com etapas de validação, melhorias, treinamento e homologação concluídas. O foco do período está na aprovação do UAT, preparação do cutover, instalação em produção e planejamento do go-live.</p>
       <div class="meta">
         <div class="meta-card">
           <div class="label">Projeto</div>
@@ -246,8 +317,39 @@
           <div class="label">Fase Atual</div>
           <div class="value">Preparação para Go-live</div>
         </div>
+        <div class="meta-card">
+          <div class="label">Data do Reporte</div>
+          <div class="value">17/06/2026</div>
+        </div>
+        <div class="meta-card">
+          <div class="label">Período de Referência</div>
+          <div class="value">Junho/2026</div>
+        </div>
+        <div class="meta-card">
+          <div class="label">Última Atualização</div>
+          <div class="value">17/06/2026</div>
+        </div>
       </div>
     </section>
+
+    <div class="date-row">
+      <div class="date-card">
+        <div class="label">Reunião Executiva</div>
+        <div class="value">17/06/2026</div>
+      </div>
+      <div class="date-card">
+        <div class="label">Próxima Reunião Executiva</div>
+        <div class="value placeholder">[preencher]</div>
+      </div>
+      <div class="date-card">
+        <div class="label">Previsão de Go-live</div>
+        <div class="value placeholder">[preencher]</div>
+      </div>
+      <div class="date-card">
+        <div class="label">Janela de Cutover</div>
+        <div class="value placeholder">[preencher]</div>
+      </div>
+    </div>
 
     <section class="content">
       <div class="column">
@@ -265,22 +367,16 @@
         <article class="card">
           <h2>Atividades Concluídas</h2>
           <h3>Flow Design</h3>
-          <ul>
-            <li>Validação dos fluxos operacionais do Empower;</li>
-            <li>Revisão e refinamento das regras funcionais dos processos integrados ao SAP PM.</li>
-          </ul>
+          <div class="milestone-item"><span>Validação dos fluxos operacionais do Empower</span><span class="milestone-date placeholder">[preencher data]</span></div>
+          <div class="milestone-item"><span>Revisão e refinamento das regras funcionais dos processos integrados ao SAP PM</span><span class="milestone-date placeholder">[preencher data]</span></div>
 
           <h3>Melhorias solicitadas e implementadas</h3>
-          <ul>
-            <li>Ajustes no fluxo de informações de ativos;</li>
-            <li>Inclusão de botão para alteração do <strong>System Status</strong> de <strong>MSPN</strong> para <strong>MSPR</strong> na tela <strong>“Minhas Notas”</strong>.</li>
-          </ul>
+          <div class="milestone-item"><span>Ajustes no fluxo de informações de ativos</span><span class="milestone-date placeholder">[preencher data]</span></div>
+          <div class="milestone-item"><span>Inclusão de botão para alteração do <strong>System Status</strong> de <strong>MSPN</strong> para <strong>MSPR</strong> na tela <strong>"Minhas Notas"</strong></span><span class="milestone-date placeholder">[preencher data]</span></div>
 
           <h3>Capacitação e validação</h3>
-          <ul>
-            <li>Treinamento concluído;</li>
-            <li>Testes de Homologação UAT concluídos.</li>
-          </ul>
+          <div class="milestone-item"><span>Treinamento concluído</span><span class="milestone-date placeholder">[preencher data]</span></div>
+          <div class="milestone-item"><span>Testes de Homologação UAT concluídos</span><span class="milestone-date placeholder">[preencher data]</span></div>
         </article>
 
         <article class="card">
@@ -289,23 +385,23 @@
           <div class="timeline">
             <div class="timeline-step">
               <div class="timeline-marker">1</div>
-              <div class="timeline-content">Aprovação do Termo de Aceite UAT</div>
+              <div class="timeline-content">Aprovação do Termo de Aceite UAT<div class="tl-date">[preencher data]</div></div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">2</div>
-              <div class="timeline-content">Documentação do Plano de Cutover</div>
+              <div class="timeline-content">Documentação do Plano de Cutover<div class="tl-date">[preencher data]</div></div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">3</div>
-              <div class="timeline-content">Instalação dos Add-Ons em PRD</div>
+              <div class="timeline-content">Instalação dos Add-Ons em PRD<div class="tl-date">[preencher data]</div></div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">4</div>
-              <div class="timeline-content">Configurações técnicas e funcionais finais</div>
+              <div class="timeline-content">Configurações técnicas e funcionais finais<div class="tl-date">[preencher data]</div></div>
             </div>
             <div class="timeline-step">
               <div class="timeline-marker">5</div>
-              <div class="timeline-content">Go-live</div>
+              <div class="timeline-content">Go-live<div class="tl-date">[preencher data]</div></div>
             </div>
           </div>
         </article>
@@ -348,7 +444,7 @@
       </div>
     </section>
 
-    <div class="footer-note">Documento gerado com base no arquivo “RESUMO EXECUTIVO”.</div>
+    <div class="footer-note">Documento gerado com base no arquivo "RESUMO EXECUTIVO" — atualizado em 17/06/2026.</div>
   </div>
 </body>
 </html>
